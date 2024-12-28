@@ -21,10 +21,39 @@ class Card : # indicates the start of a new class named Card.
         return f"{self.name} of {self.suit}"
 
     def print_card(self):
+        '''
+        Visually prints the card to make it look nice on the screen.
+        '''
         print("+---+")
         print(f"|{self.suit}  |")
         print(f"| {self.name} |")
         print(f"|  {self.suit}|")
         print("+---+")
+
+
+class Deck: # Represents a full deck of cards 
+    def __init__(self):
+        self.cards = []
+        self.reset()
+
+    def reset(self):
+        self.cards.clear()
+        values = [11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+        names = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"]
+        suits = ["♣", "♠", "♦", "♥"]
+
+        for i in range(len(values)):
+            for suit in suits:
+                self.cards.append(Card(names[i], suit, values[i]))
+
+        self.shuffle()
+
+    def shuffle(self):
+        random.shuffle(self.cards)
+
+    def draw(self):
+        return self.cards.pop()
+
+
 
 
