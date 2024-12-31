@@ -158,7 +158,7 @@ def lucky_21(player_name):
             return
 
         while True:
-            choice = input("\nWould you like to [H]it or [S]tand? ").lower()
+            choice = input("Would you like to [H]it or [S]tand?:\n").lower()
             if choice in ['h', 's']:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 break
@@ -187,14 +187,16 @@ def lucky_21(player_name):
         print("It's a tie!")
     
 
+ # Main Game loop
 if __name__ == "__main__":
     os.system("clear")
-    player_name = input("Please enter your name to begin: ").capitalize()
+    player_name = input("Please enter your name to begin:\n").capitalize()
 
     while True:
         lucky_21(player_name)
-        play_again = input("\nWould you like to play again? [Y]es or [N]o: ").lower()
+        play_again = input("\nWould you like to play again? [Y]es or [N]o:\n").lower()
         if play_again != 'y':
             break
 
     print(f"Thanks for playing, {player_name}!".upper())
+    
