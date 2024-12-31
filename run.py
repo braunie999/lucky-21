@@ -129,7 +129,7 @@ def print_game_state(player, dealer, hide_dealer_card=True):
     Clears the screen and displays the game status.
     If hide_dealer_card is True, one of the dealer's cards is hidden.
     '''
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     print("""
     **************************************************
     *             WELCOME TO LUCKY 21 !              *
