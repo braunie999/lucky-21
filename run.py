@@ -2,23 +2,6 @@ import random # Imported Module needed for for shuffling Deck
 import os # Imported Module to clear terminal
 
 
-def show_instructions():
-    os.system("clear")
-    print("""
-    **************************************************
-    *              HOW TO PLAY LUCKY 21              *
-    **************************************************
-    - The goal is to get as close to 21 as possible without exceeding it.
-    - Face cards (K, Q, J) are worth 10, as well as T cards.
-    - Aces are worth 11 or 1, depending on what benefits you.
-    - Type 'H' to Hit (draw a card).
-    - Type 'S' to Stand (keep your current hand).
-    - The dealer must draw until reaching at least 17.
-    **************************************************
-    """)
-    input("Press Enter to continue...\n")
-
-
  # Represents a single playing card. 
 class Card :
     '''
@@ -146,7 +129,7 @@ def print_game_state(player, dealer, hide_dealer_card=True):
     Clears the screen and displays the game status.
     If hide_dealer_card is True, one of the dealer's cards is hidden.
     '''
-    os.system("clear")
+    os.system('cls' if os.name == 'nt' else 'clear')
     print("""
     **************************************************
     *             WELCOME TO LUCKY 21 !              *
@@ -238,17 +221,34 @@ def lucky_21(player_name):
         print("It's a tie!")
     
 
+def show_instructions():
+    os.system("clear")
+    print("""
+    **************************************************
+    *              HOW TO PLAY LUCKY 21              *
+    **************************************************
+    - The goal is to get as close to 21 as possible without exceeding it.
+    - Face cards (K, Q, J) are worth 10, as well as T cards.
+    - Aces are worth 11 or 1, depending on what benefits you.
+    - Type 'H' to Hit (draw a card).
+    - Type 'S' to Stand (keep your current hand).
+    - The dealer must draw until reaching at least 17.
+    **************************************************
+    """)
+    input("Press Enter to continue...\n")
+
+
  # Main Game loop
 if __name__ == "__main__":
     os.system("clear")
-    show_instructions()
+    show_instructions()  # Show instructions once at the start
     player_name = input("Enter your name to play:\n").capitalize()
 
     while True:
-            lucky_21(player_name)
-            play_again = input("Would you like to play again? [Y]es or [N]o:\n").lower()
-            if play_again != 'y':
-                break
-            print("Invalid input. Please enter 'Y' or 'N'.")
+        lucky_21(player_name)  # Play the game, but don't show instructions again
+        play_again = input("Would you like to play again? [Y]es or [N]o:\n").lower()
+        if play_again != 'y':
+            break
+        print("Invalid input. Please enter 'Y' or 'N'.")
 
-    print(f"Thanks for playing, {player_name}!".upper())
+    print(f"Thanks for playing, {player_name}!".upper()) 
