@@ -175,3 +175,8 @@ def lucky_21(player_name):
         dealer.add_card(deck.draw())
 
     print_game_state(player, dealer, hide_dealer_card=False)
+
+    # Determine the winner
+    if dealer.is_busted():
+        print(f"Dealer busts! {player.name} wins!")
+    
