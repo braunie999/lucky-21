@@ -2,6 +2,23 @@ import random # Imported Module needed for for shuffling Deck
 import os # Imported Module to clear terminal
 
 
+def show_instructions():
+    os.system("clear")
+    print("""
+    **************************************************
+    *              HOW TO PLAY LUCKY 21              *
+    **************************************************
+    - The goal is to get as close to 21 as possible without exceeding it.
+    - Face cards (K, Q, J) are worth 10, as well as T cards.
+    - Aces are worth 11 or 1, depending on what benefits you.
+    - Type 'H' to Hit (draw a card).
+    - Type 'S' to Stand (keep your current hand).
+    - The dealer must draw until reaching at least 17.
+    **************************************************
+    """)
+    input("Press Enter to continue...")
+
+
  # Represents a single playing card. 
 class Card :
     '''
@@ -172,6 +189,7 @@ def lucky_21(player_name):
     for _ in range(2):
         player.add_card(deck.draw())
         dealer.add_card(deck.draw())
+
 
     # Players turn 
     while True:
