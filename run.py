@@ -132,9 +132,7 @@ def print_game_state(player, dealer, hide_dealer_card=True):
     os.system("clear")
     print("""
     **************************************************
-    *                                                *
-    *          WELCOME TO LUCKY 21 BLACKJACK!        *
-    *                                                *
+    *             WELCOME TO LUCKY 21 !              *
     **************************************************
     """)
 
@@ -216,11 +214,11 @@ def lucky_21(player_name):
  # Main Game loop
 if __name__ == "__main__":
     os.system("clear")
-    player_name = input("Please enter your name to begin:\n").capitalize()
+    player_name = input("Enter your name to play:\n").capitalize()
 
     while True:
         lucky_21(player_name)
-        play_again = input("\nWould you like to play again? [Y]es or [N]o:\n").lower()
+        play_again = input("Would you like to play again? [Y]es or [N]o:\n").lower()
         if play_again != 'y':
             break
 
