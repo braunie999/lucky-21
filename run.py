@@ -179,4 +179,22 @@ def lucky_21(player_name):
     # Determine the winner
     if dealer.is_busted():
         print(f"Dealer busts! {player.name} wins!")
+    elif player.hand_value() > dealer.hand_value():
+        print(f"{player.name} wins!")
+    elif dealer.hand_value() > player.hand_value():
+        print("Dealer wins!")
+    else:
+        print("It's a tie!")
     
+
+if __name__ == "__main__":
+    os.system("clear")
+    player_name = input("Please enter your name to begin: ").capitalize()
+
+    while True:
+        lucky_21(player_name)
+        play_again = input("\nWould you like to play again? [Y]es or [N]o: ").lower()
+        if play_again != 'y':
+            break
+
+    print(f"Thanks for playing, {player_name}!".upper())
