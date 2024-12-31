@@ -48,25 +48,33 @@ class Deck:
         self.reset()
 
     def reset(self):
-        ''' Resets the deck by creating a new set of 52 cards (13 cards in each suit).'''
+        '''
+        Resets the deck by creating a new set of 52 cards (13 cards in each suit).
+        '''
         self.cards.clear()
         values = [11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2]
         names = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"]
         suits = ["♣", "♠", "♦", "♥"]
 
         for i in range(len(values)):
-            '''Loops through every suit and card value, creating a new Card and adding it to the deck.'''
+            '''
+            Loops through every suit and card value, creating a new Card and adding it to the deck.
+            '''
             for suit in suits:
                 self.cards.append(Card(names[i], suit, values[i]))
 
         self.shuffle()
 
     def shuffle(self):
-        '''Shuffles the deck to randomize the order of the cards.'''
+        '''
+        Shuffles the deck to randomize the order of the cards.
+        '''
         random.shuffle(self.cards)
 
     def draw(self):
-        '''Draws (removes) one card from the top of the deck.'''
+        '''
+        Draws (removes) one card from the top of the deck.
+        '''
         return self.cards.pop()
 
 
@@ -99,6 +107,18 @@ class Player:
 
         return value
     
+    def print_hand(self):
+        '''
+        This function will visually mimic a hand of cards by creating borders 
+        and displaying the suits and names in a structured format, making it 
+        easy to understand what cards are held.
+        '''
+        print("\n" + " ".join(["+---+" for _ in self.hand]))
+        print(" ".join([f"|{card.suit}  |" for card in self.hand]))
+        print(" ".join([f"| {card.name} |" for card in self.hand]))
+        print(" ".join([f"|  {card.suit}|" for card in self.hand]))
+        print(" ".join(["+---+" for _ in self.hand]))
+
     def is_busted(self):
         '''Checks if the player's total exceeds 21 (they "bust").'''
         return self.hand_value() > 21
@@ -110,7 +130,13 @@ def print_game_state(player, dealer, hide_dealer_card=True):
     If hide_dealer_card is True, one of the dealer's cards is hidden.
     '''
     os.system("clear")
-    print("Welcome to Lucky 21!")
+    print("""
+    **************************************************
+    *                                                *
+    *          WELCOME TO LUCKY 21 BLACKJACK!        *
+    *                                                *
+    **************************************************
+    """)
 
     '''
     This code is responsible for displaying the hands and scores of both a dealer 
@@ -150,7 +176,7 @@ def lucky_21(player_name):
         player.add_card(deck.draw())
         dealer.add_card(deck.draw())
 
-    # Players turn functions
+    # Players turn 
     while True:
         print_game_state(player, dealer)
         if player.is_busted():
@@ -199,4 +225,3 @@ if __name__ == "__main__":
             break
 
     print(f"Thanks for playing, {player_name}!".upper())
-    
