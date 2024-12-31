@@ -135,7 +135,6 @@ def print_game_state(player, dealer, hide_dealer_card=True):
     *             WELCOME TO LUCKY 21 !              *
     **************************************************
     """)
-
     '''
     This code is responsible for displaying the hands and scores of both a dealer 
     and a player in the card game. It conditionally shows the dealer's card based 
@@ -220,6 +219,7 @@ if __name__ == "__main__":
         lucky_21(player_name)
         play_again = input("Would you like to play again? [Y]es or [N]o:\n").lower()
         if play_again != 'y':
+            os.system('cls' if os.name == 'nt' else 'clear')
             break
 
     print(f"Thanks for playing, {player_name}!".upper())
