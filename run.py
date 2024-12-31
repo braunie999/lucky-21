@@ -205,8 +205,14 @@ def lucky_21(player_name):
             break
     
     # Dealer's turn
-    while dealer.hand_value() < 17:
+    '''
+    This code governs the rules for when a dealer hits based
+    on the total value of their hand, ensuring that they 
+    play according to the standard rules of blackjack.
+    '''
+    while dealer.hand_value() < 17 or (dealer.hand_value() == 17 and any(card.name == 'A' for card in dealer.hand)):
         dealer.add_card(deck.draw())
+
 
     print_game_state(player, dealer, hide_dealer_card=False)
 
@@ -246,9 +252,8 @@ if __name__ == "__main__":
 
     while True:
         lucky_21(player_name)  # Play the game, but don't show instructions again
-        play_again = input("Would you like to play again? [Y]es or [N]o:\n").lower()
-        if play_again != 'y':
+        play_again = input("Press ENTER to continue or type 'Q' to quit.").upper()
+        if play_again == 'Q':
+            print("Thanks for playing!")
             break
-        print("Invalid input. Please enter 'Y' or 'N'.")
-
-    print(f"Thanks for playing, {player_name}!".upper()) 
+    
