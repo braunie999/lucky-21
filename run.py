@@ -70,5 +70,39 @@ class Deck:
         return self.cards.pop()
 
 
+class Player:
+    '''
+    Represents a player in the game (you or the dealer).
+    '''
+    def __init__(self,name):
+        self.name = name
+        self.hand = []
+
+    def add_card(self, card):
+        '''
+        Adds a card to the player's hand.
+        '''
+        self.hand.append(card)
+
+    def hand_value(self):
+        '''
+        Calculates the total value of the player's hand.
+        Special Rule for Aces: If the total goes over 21 and 
+        the player has an Ace, the Ace's value is reduced from 11 to 1.
+        '''
+        value = sum(card.value for card in self.hand)
+        aces = sum(1 for card in self.hand if card.name == "A")
+
+        while value > 21 and aces:
+            value -= 10
+            aces -= 1
+
+        return value
+    
+    def is_busted(self):
+        '''Checks if the player's total exceeds 21 (they "bust").'''
+        return self.hand_value() > 21
+
+
 
 
