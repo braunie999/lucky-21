@@ -190,6 +190,16 @@ def lucky_21(player_name):
         player.add_card(deck.draw())
         dealer.add_card(deck.draw())
 
+     # Check for Blackjack immediately after the initial deal
+    if player.hand_value() == 21:
+        print_game_state(player, dealer, hide_dealer_card=False)
+        print(f"{player.name} hits Blackjack! {player.name} wins!")
+        return
+    if dealer.hand_value() == 21:
+        print_game_state(player, dealer, hide_dealer_card=False)
+        print("Dealer hits Blackjack! Dealer wins!")
+        return
+
 
     # Players turn 
     while True:
@@ -231,13 +241,14 @@ def lucky_21(player_name):
  # Main Game loop
 if __name__ == "__main__":
     os.system("clear")
+    show_instructions()
     player_name = input("Enter your name to play:\n").capitalize()
 
     while True:
-        lucky_21(player_name)
-        play_again = input("Would you like to play again? [Y]es or [N]o:\n").lower()
-        if play_again != 'y':
-            os.system('cls' if os.name == 'nt' else 'clear')
-            break
+            lucky_21(player_name)
+            play_again = input("Would you like to play again? [Y]es or [N]o:\n").lower()
+            if play_again != 'y':
+                break
+            print("Invalid input. Please enter 'Y' or 'N'.")
 
     print(f"Thanks for playing, {player_name}!".upper())
