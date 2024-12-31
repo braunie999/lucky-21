@@ -104,5 +104,35 @@ class Player:
         return self.hand_value() > 21
 
 
+def print_game_state(player, dealer, hide_dealer_card=True):
+    ''' 
+    Clears the screen and displays the game status.
+    If hide_dealer_card is True, one of the dealer's cards is hidden.
+    '''
+    os.system("clear")
+    print("Welcome to Lucky 21!")
+
+    '''
+    This code is responsible for displaying the hands and scores of both a dealer 
+    and a player in the card game. It conditionally shows the dealer's card based 
+    on whether it should be hidden, while always showing the player's hand and score.
+    The use of methods like print_hand() and hand_value() implies that both the dealer 
+    and player have card management and value calculation functionalities encapsulated 
+    in their respective classes.
+    '''
+    print(f"\n--- {dealer.name}'s Hand ---")
+    if hide_dealer_card:
+        print("[Hidden Card]")
+        dealer.hand[1].print_card()
+    else:
+        dealer.print_hand()
+        print(f"{dealer.name}'s Score: {dealer.hand_value()}")
+
+    print(f"\n--- {player.name}'s Hand ---")
+    player.print_hand()
+    print(f"{player.name}'s Score: {player.hand_value()}")
+
+
+
 
 
