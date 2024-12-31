@@ -16,7 +16,7 @@ def show_instructions():
     - The dealer must draw until reaching at least 17.
     **************************************************
     """)
-    input("Press Enter to continue...")
+    input("Press Enter to continue...\n")
 
 
  # Represents a single playing card. 
