@@ -133,6 +133,45 @@ def print_game_state(player, dealer, hide_dealer_card=True):
     print(f"{player.name}'s Score: {player.hand_value()}")
 
 
+def lucky_21(player_name):
+    '''
+    This is the main function that runs the game.
+    Creates a Deck, A new deck of cards is created and shuffled.
+    Deals Cards, both the player and dealer get two cards.
+    Player's Turn, the player decides whether to hit (draw another card) or stand (keep their hand).
+    Dealer's Turn, the dealer must keep drawing cards until their total is 17 or higher.
+    '''
+    deck = Deck()
+    player = Player(name=player_name)
+    dealer = Player(name="Dealer")
 
+    # Initial deal 
+    for _ in range(2):
+        player.add_card(deck.draw())
+        dealer.add_card(deck.draw())
 
+    # Players turn functions
+    while True:
+        print_game_state(player, dealer)
+        if player.is_busted():
+            print(f"{player.name} busts! Dealer wins.")
+            return
 
+        while True:
+            choice = input("\nWould you like to [H]it or [S]tand? ").lower()
+            if choice in ['h', 's']:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                break
+            else:
+                print("Input invalid. Please enter 'H' to hit or 'S' to stand.")
+
+        if choice == 'h':
+            player.add_card(deck.draw())
+        else:
+            break
+    
+    # Dealer's turn
+    while dealer.hand_value() < 17:
+        dealer.add_card(deck.draw())
+
+    print_game_state(player, dealer, hide_dealer_card=False)
