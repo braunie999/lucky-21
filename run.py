@@ -1,5 +1,5 @@
-import random # Imported Module needed for for shuffling Deck
-import os # Imported Module to clear terminal
+import random # Imported Module for game functioning.
+import os # Imported Module to clear terminals
 
 
  # Represents a single playing card. 
@@ -50,6 +50,10 @@ class Deck:
     def reset(self):
         '''
         Resets the deck by creating a new set of 52 cards (13 cards in each suit).
+        The use of the letter "T" is to indiate the card suit and  value of 10 without 
+        disrupting the visual print out of the card in the terminal.  
+        Original code from TokyoEdTech
+        https://pastebin.com/WvmEtZDg
         '''
         self.cards.clear()
         values = [11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2]
@@ -130,11 +134,9 @@ def print_game_state(player, dealer, hide_dealer_card=True):
     If hide_dealer_card is True, one of the dealer's cards is hidden.
     '''
     os.system('clear')
-    print("""
-    **************************************************
-    *             WELCOME TO LUCKY 21 !              *
-    **************************************************
-    """)
+    print("*********************************************")
+    print("********* Welcome to Lucky 21 ! *************")
+    print("*********************************************")
     '''
     This code is responsible for displaying the hands and scores of both a dealer 
     and a player in the card game. It conditionally shows the dealer's card based 
@@ -217,7 +219,7 @@ def lucky_21(player_name):
 
     print_game_state(player, dealer, hide_dealer_card=False)
 
-    # Determine the winner
+    # Determine the winner of round
     if dealer.is_busted():
         print(f"Dealer busts! {player.name} wins!")
     elif player.hand_value() > dealer.hand_value():
@@ -249,12 +251,18 @@ def show_instructions():
 if __name__ == "__main__":
     os.system("clear")
     show_instructions()  # Show instructions once at the start
-    player_name = input("Enter your name to play:\n").capitalize()
+    while True:
+        player_name = input("Enter your name to play:\n").strip()
+        if player_name:
+            player_name = player_name.capitalize()
+            break
+        else:
+            print("Name cannot be empty. Please enter your name.")
 
     while True:
         lucky_21(player_name)  # Play the game, but don't show instructions again
         play_again = input("Press ENTER to continue or type 'Q' to quit.").upper()
         if play_again == 'Q':
-            print("Thanks for playing!")
+            print(f"Thanks for playing, {player_name}!".upper())
             break
     
