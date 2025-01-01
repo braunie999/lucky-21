@@ -1,8 +1,12 @@
-import random # Imported Module for game functioning.
-import os # Imported Module to clear terminals
+'''
+Modules needed to run Lucky 21 blackjack game
+'''
+
+import random 
+import os 
 
 
- # Represents a single playing card. 
+# Represents a single playing card. 
 class Card :
     '''
     Defines the Card class as well as initialises the card function
@@ -36,7 +40,7 @@ class Card :
         print("+---+")
 
 
- # Represents a full deck of cards 
+# Represents a full deck of cards 
 class Deck: 
     def __init__(self):
         '''
@@ -82,6 +86,7 @@ class Deck:
         return self.cards.pop()
 
 
+# Calculates and prints cards in hand 
 class Player:
     '''
     Represents a player in the game (you or the dealer).
@@ -128,6 +133,7 @@ class Player:
         return self.hand_value() > 21
 
 
+# Game layout in mock terminal
 def print_game_state(player, dealer, hide_dealer_card=True):
     ''' 
     Clears the screen and displays the game status.
@@ -176,7 +182,7 @@ def lucky_21(player_name):
         player.add_card(deck.draw())
         dealer.add_card(deck.draw())
 
-     # Check for Blackjack immediately after the initial deal
+    # Check for Blackjack immediately after the initial deal
     if player.hand_value() == 21:
         print_game_state(player, dealer, hide_dealer_card=False)
         print(f"{player.name} hits Blackjack! {player.name} wins!")
@@ -216,7 +222,6 @@ def lucky_21(player_name):
     while dealer.hand_value() < 17 or (dealer.hand_value() == 17 and any(card.name == 'A' for card in dealer.hand)):
         dealer.add_card(deck.draw())
 
-
     print_game_state(player, dealer, hide_dealer_card=False)
 
     # Determine the winner of round
@@ -230,6 +235,7 @@ def lucky_21(player_name):
         print("It's a tie!")
     
 
+# Game insructions
 def show_instructions():
     os.system("clear")
     print("""
@@ -247,10 +253,10 @@ def show_instructions():
     input("Press Enter to continue...\n")
 
 
- # Main Game loop
+# Main Game loop
 if __name__ == "__main__":
     os.system("clear")
-    show_instructions()  # Show instructions once at the start
+    show_instructions() 
     while True:
         player_name = input("Enter your name to play:\n").strip()
         if player_name:
@@ -259,8 +265,9 @@ if __name__ == "__main__":
         else:
             print("Name cannot be empty. Please enter your name.")
 
+    # Play the game, but don't show instructions again
     while True:
-        lucky_21(player_name)  # Play the game, but don't show instructions again
+        lucky_21(player_name)  
         play_again = input("Press ENTER to continue or type 'Q' to quit.").upper()
         if play_again == 'Q':
             print(f"Thanks for playing, {player_name}!".upper())
