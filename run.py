@@ -1,7 +1,7 @@
 import random # Imported Module needed for for shuffling Deck
 import os # Imported Module to clear terminal
 
-os.system("clear")
+
  # Represents a single playing card. 
 class Card :
     '''
@@ -164,6 +164,7 @@ def lucky_21(player_name):
     Player's Turn, the player decides whether to hit (draw another card) or stand (keep their hand).
     Dealer's Turn, the dealer must keep drawing cards until their total is 17 or higher.
     '''
+    os.system("clear")
     deck = Deck()
     player = Player(name=player_name)
     dealer = Player(name="Dealer")
