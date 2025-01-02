@@ -163,7 +163,7 @@ def print_game_state(player, dealer, hide_dealer_card=True):
     player.print_hand()
     print(f"{player.name}'s Score: {player.hand_value()}")
 
-
+    
 def lucky_21(player_name):
     '''
     This is the main function that runs the game.
@@ -176,6 +176,7 @@ def lucky_21(player_name):
     deck = Deck()
     player = Player(name=player_name)
     dealer = Player(name="Dealer")
+
 
     # Initial deal 
     for _ in range(2):
@@ -201,12 +202,12 @@ def lucky_21(player_name):
             return
 
         while True:
-            choice = input("Would you like to [H]it or [S]tand?:\n").lower()
-            if choice in ['h', 's']:
+            choice = input("Would you like to [H]it, [S]tand or [Q]uit?:\n").lower()
+            if choice in ['h', 's', 'q']:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 break
             else:
-                print("Input invalid. Please enter 'H' to hit or 'S' to stand.")
+                print("Input invalid. Please enter 'H' to hit, 'S' to stand or 'Q' to quit.")
 
         if choice == 'h':
             player.add_card(deck.draw())
@@ -234,15 +235,28 @@ def lucky_21(player_name):
 
 
     # Determine the winner of round
+    
+    player_wins = 0
+    dealer_wins = 0
+
     if dealer.is_busted():
         print(f"Dealer busts! {player.name} wins!")
+        player_wins += 1
     elif player.hand_value() > dealer.hand_value():
         print(f"{player.name} wins!")
+        player_wins += 1
     elif dealer.hand_value() > player.hand_value():
         print("Dealer wins!")
-    else:
-        print("It's a tie!")
+        dealer_wins += 1
+    elif player.hand_value() == dealer.hand_value():
+        if len(player.hand) < len(dealer.hand):
+            print(f"{player.name} wins with fewer cards!")
+        else:
+            print("It's a tie!")
     
+
+    print(f"\nScoreboard - {player.name}: {player_wins} | Dealer: {dealer_wins}")
+
 
 # Game insructions
 def show_instructions():
@@ -281,4 +295,7 @@ if __name__ == "__main__":
         if play_again == 'Q':
             print(f"Thanks for playing, {player_name}!".upper())
             break
+
+
+
     
