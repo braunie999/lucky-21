@@ -215,14 +215,23 @@ def lucky_21(player_name):
     
     # Dealer's turn
     '''
-    This code governs the rules for when a dealer hits based
-    on the total value of their hand, ensuring that they 
-    play according to the standard rules of blackjack.
+    The dealer logic uses a while True loop for better readability, 
+    checking the dealer's hand value just once per iteration to determine 
+    whether to hit. By separating the conditions for drawing cards, it 
+    clarifies the rules and enhances the performance of the dealer's 
+    turn in the game.
     '''
-    while dealer.hand_value() < 17 or (dealer.hand_value() == 17 and any(card.name == 'A' for card in dealer.hand)):
-        dealer.add_card(deck.draw())
-
+    while True:
+        dealer_hand_value = dealer.hand_value()
+        if dealer_hand_value < 17:
+            dealer.add_card(deck.draw())
+        elif dealer_hand_value == 17 and any(card.name == 'A' for card in dealer.hand):
+            dealer.add_card(deck.draw())
+        else:
+            break
+        
     print_game_state(player, dealer, hide_dealer_card=False)
+
 
     # Determine the winner of round
     if dealer.is_busted():
