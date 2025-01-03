@@ -1,10 +1,13 @@
 '''
 Modules needed to run Lucky 21 blackjack game
 '''
-
 import random 
 import os 
 
+
+# Global variables to keep track of scores  
+player_wins = 0  
+dealer_wins = 0  
 
 # Represents a single playing card. 
 class Card :
@@ -140,9 +143,9 @@ def print_game_state(player, dealer, hide_dealer_card=True):
     If hide_dealer_card is True, one of the dealer's cards is hidden.
     '''
     os.system('clear')
-    print("*********************************************")
-    print("********* Welcome to Lucky 21 ! *************")
-    print("*********************************************")
+    print("***********************************************")
+    print("*** ♣ ♠ ♥ ♦ ~Welcome to Lucky 21 !~ ♦ ♥ ♠ ♣ ***")
+    print("***********************************************")
     '''
     This code is responsible for displaying the hands and scores of both a dealer 
     and a player in the card game. It conditionally shows the dealer's card based 
@@ -163,15 +166,22 @@ def print_game_state(player, dealer, hide_dealer_card=True):
     player.print_hand()
     print(f"{player.name}'s Score: {player.hand_value()}")
 
-    
+
+def print_scoreboard(player_name):  
+    '''Displays the current scoreboard.'''  
+    print(f"\nScoreboard - {player_name}: {player_wins} | Dealer: {dealer_wins}")  
+
+
 def lucky_21(player_name):
     '''
-    This is the main function that runs the game.
+    This is the main logic that runs the game.
     Creates a Deck, A new deck of cards is created and shuffled.
     Deals Cards, both the player and dealer get two cards.
     Player's Turn, the player decides whether to hit (draw another card) or stand (keep their hand).
     Dealer's Turn, the dealer must keep drawing cards until their total is 17 or higher.
     '''
+    global player_wins, dealer_wins
+
     os.system("clear")
     deck = Deck()
     player = Player(name=player_name)
@@ -187,33 +197,39 @@ def lucky_21(player_name):
     if player.hand_value() == 21:
         print_game_state(player, dealer, hide_dealer_card=False)
         print(f"{player.name} hits Blackjack! {player.name} wins!")
+        player_wins += 1  # Update player wins  
+        print_scoreboard(player_name) 
         return
     if dealer.hand_value() == 21:
         print_game_state(player, dealer, hide_dealer_card=False)
         print("Dealer hits Blackjack! Dealer wins!")
+        dealer_wins += 1  # Update dealer wins  
+        print_scoreboard(player_name)
         return
-
 
     # Players turn 
     while True:
         print_game_state(player, dealer)
         if player.is_busted():
             print(f"{player.name} busts! Dealer wins.")
+            dealer_wins += 1
+            print_scoreboard(player_name)
             return
 
         while True:
-            choice = input("Would you like to [H]it, [S]tand or [Q]uit?:\n").lower()
+            choice = input("Would you like to [H]it or [S]tand ?:\n").lower()
             if choice in ['h', 's', 'q']:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 break
             else:
-                print("Input invalid. Please enter 'H' to hit, 'S' to stand or 'Q' to quit.")
+                print("Input invalid. Please enter 'H' to hit or 'S' to stand.")
 
         if choice == 'h':
             player.add_card(deck.draw())
         else:
             break
-    
+
+
     # Dealer's turn
     '''
     The dealer logic uses a while True loop for better readability, 
@@ -233,12 +249,7 @@ def lucky_21(player_name):
         
     print_game_state(player, dealer, hide_dealer_card=False)
 
-
     # Determine the winner of round
-    
-    player_wins = 0
-    dealer_wins = 0
-
     if dealer.is_busted():
         print(f"Dealer busts! {player.name} wins!")
         player_wins += 1
@@ -251,12 +262,11 @@ def lucky_21(player_name):
     elif player.hand_value() == dealer.hand_value():
         if len(player.hand) < len(dealer.hand):
             print(f"{player.name} wins with fewer cards!")
+            player_wins += 1 
         else:
             print("It's a tie!")
-    
 
-    print(f"\nScoreboard - {player.name}: {player_wins} | Dealer: {dealer_wins}")
-
+    print_scoreboard(player_name)
 
 # Game insructions
 def show_instructions():
@@ -295,7 +305,3 @@ if __name__ == "__main__":
         if play_again == 'Q':
             print(f"Thanks for playing, {player_name}!".upper())
             break
-
-
-
-    
