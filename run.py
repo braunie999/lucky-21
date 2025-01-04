@@ -4,12 +4,11 @@ Modules needed to run Lucky 21 blackjack game
 import random 
 import os 
 
-
-# Global variables to keep track of scores  
-player_wins = 0  
-dealer_wins = 0  
-
-# Represents a single playing card. 
+# Game Constants
+MAX_SCORE = 21
+DEALER_STAND_SCORE = 17
+ 
+ 
 class Card :
     '''
     Defines the Card class as well as initialises the card function
