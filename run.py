@@ -9,7 +9,7 @@ MAX_SCORE = 21
 DEALER_STAND_SCORE = 17
  
 
-class Card :
+class Card:
         '''
          Represents a single playing card and designed to 
          create instances of playing cards, each with a name,
@@ -27,7 +27,7 @@ class Card :
             string with the object's name and suit attributes 
             using an f-string: f"{self.name} of {self.suit}".
             '''
-        return f"{self.name} of {self.suit}"
+            return f"{self.name} of {self.suit}"
 
         def print_card(self):
             """Displays the card in a simple visual format."""
@@ -96,10 +96,9 @@ class Player:
         value = sum(card.value for card in self.hand)
         aces = sum(1 for card in self.hand if card.name == "A")
 
-        while value > 21 and aces:
+        while value > MAX_SCORE and aces:
             value -= 10
             aces -= 1
-
         return value
     
     def print_hand(self):
@@ -107,7 +106,7 @@ class Player:
         This function will visually mimic a hand of cards 
         by creating borders and displaying the suits and 
         names in a structured format, making it 
-        easy to understand what cards are held.
+        easy to understand what cards are being held.
         '''
         print("\n" + " ".join(["+---+" for _ in self.hand]))
         print(" ".join([f"|{card.suit}  |" for card in self.hand]))
@@ -117,7 +116,12 @@ class Player:
 
     def is_busted(self):
         '''Checks if the player's total exceeds 21 (they "bust").'''
-        return self.hand_value() > 21
+        return self.hand_value() > MAX_SCORE
+
+def __init__(self, player_name):
+        self.player_name = player_name
+        self.player_wins = 0
+        self.dealer_wins = 0
 
 
 # Displays current game state
@@ -127,7 +131,7 @@ def print_game_state(player, dealer, hide_dealer_card=True):
     If hide_dealer_card is True, one of the dealer's 
     cards is hidden.
     '''
-    os.system('clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
     print("***********************************************")
     print("*** ♣ ♠ ♥ ♦ ~Welcome to Lucky 21 !~ ♦ ♥ ♠ ♣ ***")
     print("***********************************************")
