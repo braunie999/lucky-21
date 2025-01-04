@@ -60,13 +60,10 @@ class Deck:
         names = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"]
         suits = ["♣", "♠", "♦", "♥"]
 
-        for i in range(len(values)):
-            '''
-            Loops through every suit and card value, 
-            creating a new Card and adding it to the deck.
-            '''
+        # Loops through every suit and card value, creating a new Card and adding it to the deck.
+        for i, value in enumerate(values):
             for suit in suits:
-                self.cards.append(Card(names[i], suit, values[i]))
+                self.cards.append(Card(names[i], suit, value))
         self.shuffle()
 
     def shuffle(self):
