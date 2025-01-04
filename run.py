@@ -126,7 +126,7 @@ class BlackjackGame:
         self.dealer_wins = 0
     
     # Displays current game state
-    def print_game_state(player, dealer, hide_dealer_card=True):
+    def print_game_state(self, player, dealer, hide_dealer_card=True):
         ''' 
         Clears the screen and displays the game status.
         If hide_dealer_card is True, one of the dealer's 
@@ -134,7 +134,9 @@ class BlackjackGame:
         '''
         os.system('cls' if os.name == 'nt' else 'clear')
         print("***********************************************")
-        print("*** ♣ ♠ ♥ ♦ ~Welcome to Lucky 21 !~ ♦ ♥ ♠ ♣ ***")
+        print("*                                             *")
+        print("*   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   *")
+        print("*                                             *")
         print("***********************************************")
     
         print(f"\n--- {dealer.name}'s Hand ---")
@@ -156,24 +158,20 @@ class BlackjackGame:
         print(f"{player.name}'s Score: {player.hand_value()}")
 
 
-    def print_scoreboard(player_name):  
+    def print_scoreboard(self):  
         '''Displays the current scoreboard.'''  
-        print(f"\nScoreboard - {player_name}: {player_wins} | Dealer: {dealer_wins}")  
+        print(f"\nSCORE - {self.player_name}: {self.player_wins} | Dealer: {self.dealer_wins}")  
 
 
-    def lucky_21(player_name):
+    def lucky_21(self):
         '''
         This is the main logic that runs the game.
         A new deck of cards is created and shuffled,
         and both the player and dealer get two cards.
         '''
-        global player_wins, dealer_wins
-
-        os.system("clear")
         deck = Deck()
-        player = Player(name=player_name)
+        player = Player(name=self.player_name)
         dealer = Player(name="Dealer")
-
 
         # Initial deal 
         for _ in range(2):
@@ -181,31 +179,31 @@ class BlackjackGame:
             dealer.add_card(deck.draw())
 
         # Check for Blackjack immediately after the initial deal
-        if player.hand_value() == 21:
-            print_game_state(player, dealer, hide_dealer_card=False)
+        if player.hand_value() == MAX_SCORE:
+            self.print_game_state(player, dealer, hide_dealer_card=False)
             print(f"{player.name} hits Blackjack! {player.name} wins!")
-            player_wins += 1  # Update player wins  
-            print_scoreboard(player_name) 
+            self.player_wins += 1  # Update player wins  
+            self.print_scoreboard() 
             return
-        if dealer.hand_value() == 21:
-            print_game_state(player, dealer, hide_dealer_card=False)
+        if dealer.hand_value() == MAX_SCORE:
+            self.print_game_state(player, dealer, hide_dealer_card=False)
             print("Dealer hits Blackjack! Dealer wins!")
-            dealer_wins += 1  # Update dealer wins  
-            print_scoreboard(player_name)
+            self.dealer_wins += 1  # Update dealer wins  
+            self.print_scoreboard()
             return
 
         # Players turn 
         while True:
-            print_game_state(player, dealer)
+            self.print_game_state(player, dealer)
             if player.is_busted():
                 print(f"{player.name} busts! Dealer wins.")
-                dealer_wins += 1
-                print_scoreboard(player_name)
+                self.dealer_wins += 1
+                self.print_scoreboard()
                 return
 
             while True:
                 choice = input("Would you like to [H]it or [S]tand ?:\n").lower()
-                if choice in ['h', 's', 'q']:
+                if choice in ['h', 's',]:
                     os.system('cls' if os.name == 'nt' else 'clear')
                     break
                 else:
@@ -216,7 +214,6 @@ class BlackjackGame:
             else:
                 break
 
-
         # Dealer's turn
         '''
         The dealer logic uses a while True loop to make it 
@@ -225,34 +222,33 @@ class BlackjackGame:
         the drawing rules and improving performance.
         '''
         while True:
-            dealer_hand_value = dealer.hand_value()
-            if dealer_hand_value < 17:
+            if dealer.hand_value() < DEALER_STAND_SCORE:
                 dealer.add_card(deck.draw())
-            elif dealer_hand_value == 17 and any(card.name == 'A' for card in dealer.hand):
+            elif dealer.hand_value() == 17 and any(card.name == 'A' for card in dealer.hand):
                 dealer.add_card(deck.draw())
             else:
                 break
             
-        print_game_state(player, dealer, hide_dealer_card=False)
+        self.print_game_state(player, dealer, hide_dealer_card=False)
 
         # Determine the winner of round
         if dealer.is_busted():
             print(f"Dealer busts! {player.name} wins!")
-            player_wins += 1
+            self.player_wins += 1
         elif player.hand_value() > dealer.hand_value():
             print(f"{player.name} wins!")
-            player_wins += 1
+            self.player_wins += 1
         elif dealer.hand_value() > player.hand_value():
             print("Dealer wins!")
-            dealer_wins += 1
+            self.dealer_wins += 1
         elif player.hand_value() == dealer.hand_value():
             if len(player.hand) < len(dealer.hand):
                 print(f"{player.name} wins with fewer cards!")
-                player_wins += 1 
+                self.player_wins += 1 
             else:
                 print("It's a tie!")
 
-        print_scoreboard(player_name)
+        self.print_scoreboard()
 
 # Game insructions
 def show_instructions():
@@ -284,9 +280,10 @@ if __name__ == "__main__":
         else:
             print("Name cannot be empty. Please enter your name.")
 
+    game = BlackjackGame(player_name)
 
     while True:
-        lucky_21(player_name)  
+        game.lucky_21()  
         play_again = input("Press ENTER to continue or type 'Q' to quit.").upper()
         if play_again == 'Q':
             print(f"Thanks for playing, {player_name}!".upper())
