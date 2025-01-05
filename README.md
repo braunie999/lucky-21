@@ -74,6 +74,34 @@ The primary goal of the Lucky 21 Blackjack Game is to provide an interactive, fu
 7. Update and display scores.
 8. Allow the player to replay or quit.
 
+#### Programming Paradigm
+
+The Lucky 21 Blackjack Game follows the Object-Oriented Programming (OOP) paradigm, focusing on:
+
+##### Encapsulation
+
+* Game components such as Card, Deck, Player, and BlackjackGame are encapsulated in separate classes.
+
+* Each class handles specific functionality, ensuring a modular design.
+
+##### Abstraction
+
+* The game hides complex logic (e.g., card value calculations, dealer behavior) behind intuitive methods like hand_value() and add_card().
+
+##### Inheritance
+
+* While not extensively used in this project, the class-based structure allows for future inheritance, enabling features like multiple game modes or different types of players.
+
+##### Polymorphism
+
+* Polymorphic behavior is achieved through overriding methods like __str__() in the Card class to provide a custom string representation.
+
+##### Reusability
+
+* The modular design of classes like Deck and Player allows them to be reused or extended in other card games.
+
+* This paradigm ensures that the game is scalable, maintainable, and easy to understand for future developers.
+
 ### The Surface Plane
 
 #### Design
@@ -144,7 +172,7 @@ The game uses simple visual elements to display cards and game status:
 ## Requirements
 
 * Python 3.x
-* No external libraries are required; the game uses built-in libraries (`random` and `os`).
+* No external libraries are required; the game uses built-in libraries (`random`, `time` and `os`).
 
 ## Installation
 
@@ -155,7 +183,7 @@ The game uses simple visual elements to display cards and game status:
 
 ## Usage
 
-1. Run the game by executing the script: `python lucky_21.py`.
+1. Run the game by executing the script: `python run.py`.
 2. Follow the on-screen instructions to enter your name and start playing.
 3. Choose to hit (draw a card) or stand (keep your current hand) when prompted.
 
@@ -177,20 +205,20 @@ The game uses simple visual elements to display cards and game status:
 
 #### Validator Testing
 
-* Code was validated using [pep8online.com](https://pep8online.com) to ensure compliance with PEP 8 standards.
+* Code was validated using [[pep8online.com](https://pep8ci.herokuapp.com/)] to ensure compliance with PEP 8 standards.
 
 #### Notable Bugs
 
-* **Resolved**: Dealer occasionally drawing cards incorrectly on soft 17.
-* **Resolved**: Incorrect display of score in certain edge cases.
+* __Resolved__: Dealer occasionally drawing cards incorrectly on soft 17.
+* __Resolved__: Incorrect display of score in certain edge cases.
 
 #### Libraries Utilized
 
 ##### Built-in Python Libraries
 
-* **time**: Used to add delays for a better user experience.
-* **random**: Used to shuffle the deck and handle randomness in card draws.
-* **os**: Used to clear the terminal screen for better readability.
+* __time__: Used to add delays for a better user experience.
+* __random__: Used to shuffle the deck and handle randomness in card draws.
+* __os__: Used to clear the terminal screen for better readability.
 
 ## Deployment
 
