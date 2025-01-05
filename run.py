@@ -199,7 +199,7 @@ class BlackjackGame:
         while True:
             self.print_game_state(player, dealer)
             if player.is_busted():
-                time.sleep(0.2)
+                self.print_game_state(player, dealer, hide_dealer_card=False)  # Reveal dealer's card
                 print(f"{player.name} busts! Dealer wins.")
                 self.dealer_wins += 1
                 self.print_scoreboard()
