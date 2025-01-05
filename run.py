@@ -1,6 +1,7 @@
 '''
 Modules needed to run Lucky 21 blackjack game
 '''
+import time
 import random 
 import os 
 
@@ -180,12 +181,14 @@ class BlackjackGame:
 
         # Check for Blackjack immediately after the initial deal
         if player.hand_value() == MAX_SCORE:
+            time.sleep(1)
             self.print_game_state(player, dealer, hide_dealer_card=False)
             print(f"{player.name} hits Blackjack! {player.name} wins!")
             self.player_wins += 1  # Update player wins  
             self.print_scoreboard() 
             return
         if dealer.hand_value() == MAX_SCORE:
+            time.sleep(1)
             self.print_game_state(player, dealer, hide_dealer_card=False)
             print("Dealer hits Blackjack! Dealer wins!")
             self.dealer_wins += 1  # Update dealer wins  
@@ -196,6 +199,7 @@ class BlackjackGame:
         while True:
             self.print_game_state(player, dealer)
             if player.is_busted():
+                time.sleep(0.2)
                 print(f"{player.name} busts! Dealer wins.")
                 self.dealer_wins += 1
                 self.print_scoreboard()
@@ -212,12 +216,14 @@ class BlackjackGame:
             while True:
                 choice = input("Would you like to [H]it or [S]tand ?:\n").lower()
                 if choice in ['h', 's',]:
+                    time.sleep(1)
                     os.system('cls' if os.name == 'nt' else 'clear')
                     break
                 else:
                     print("Input invalid. Enter 'H' to hit or 'S' to stand.")
 
             if choice == 'h':
+                time.sleep(0.2)
                 player.add_card(deck.draw())
             else:
                 break
@@ -290,6 +296,7 @@ def show_instructions():
     **************************************************
     """)
     input("Press Enter to continue...\n")
+    time.sleep(0.3)
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
@@ -301,6 +308,7 @@ if __name__ == "__main__":
         player_name = input("Enter your name to play:\n").strip()
         if player_name:
             player_name = player_name.capitalize()
+            time.sleep(0.5)
             break
         else:
             print("Name cannot be empty. Please enter your name.")
@@ -312,6 +320,7 @@ if __name__ == "__main__":
         while True:
             play_again = input("Press ENTER to continue or type 'Q' to quit: ").upper()
             if play_again in ['', 'Q']:
+                time.sleep(0.5)
                 break
             else:
                 print("Invalid input. Please press ENTER to continue or type 'Q' to quit.")
