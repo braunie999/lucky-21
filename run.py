@@ -2,47 +2,47 @@
 Modules needed to run Lucky 21 blackjack game
 '''
 import time
-import random 
-import os 
+import random
+import os
 
 # Game Constants
 MAX_SCORE = 21
 DEALER_STAND_SCORE = 17
- 
+
 
 class Card:
-        '''
-         Represents a single playing card and designed to 
-         create instances of playing cards, each with a name,
-         suit, and value. Self refers to the current instance 
-         of the class, allowing access to its properties.
-        '''
-        def __init__(self, name, suit, value):
-            self.name = name
-            self.suit = suit
-            self.value = value
-
-        def __str__(self):
-            '''
-            In this __str__ method, it returns a formatted 
-            string with the object's name and suit attributes 
-            using an f-string: f"{self.name} of {self.suit}".
-            '''
-            return f"{self.name} of {self.suit}"
-
-        def print_card(self):
-            """Displays the card in a simple visual format."""
-            print("+---+")
-            print(f"|{self.suit}  |")
-            print(f"| {self.name} |")
-            print(f"|  {self.suit}|")
-            print("+---+")
-
-
-class Deck: 
     '''
-    The Deck class has an initializer that creates 
-    an empty list to hold cards and calls a reset 
+    Represents a single playing card and designed to
+    create instances of playing cards, each with a name,
+    suit, and value. Self refers to the current instance
+    of the class, allowing access to its properties.
+    '''
+    def __init__(self, name, suit, value):
+        self.name = name
+        self.suit = suit
+        self.value = value
+
+    def __str__(self):
+        '''
+        In this __str__ method, it returns a formatted
+        string with the object's name and suit attributes
+        using an f-string: f"{self.name} of {self.suit}".
+        '''
+        return f"{self.name} of {self.suit}"
+
+    def print_card(self):
+        '''Displays the card in a simple visual format.'''
+        print("+---+")
+        print(f"|{self.suit}  |")
+        print(f"| {self.name} |")
+        print(f"|  {self.suit}|")
+        print("+---+")
+
+
+class Deck:
+    '''
+    The Deck class has an initializer that creates
+    an empty list to hold cards and calls a reset
     method to populate that list.
     '''
     def __init__(self):
@@ -52,17 +52,21 @@ class Deck:
     def reset(self):
         '''
         Resets the deck by creating a new set of 52 cards .
-        The use of the letter "T" is the face value for 10.  
+        The use of the letter "T" is the face value for 10.
         Original code from TokyoEdTech
         https://pastebin.com/WvmEtZDg
         '''
         self.cards.clear()
         values = [11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2]
-        names = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"]
+        names = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3",
+                 "2"]
         suits = ["♣", "♠", "♦", "♥"]
 
-        # Loops through every suit and card value, creating a new Card and adding it to the deck.
         for i, value in enumerate(values):
+            '''
+            Loops through every suit and card value,
+            creating a new Card and adding it to the deck.
+            '''
             for suit in suits:
                 self.cards.append(Card(names[i], suit, value))
         self.shuffle()
@@ -76,10 +80,10 @@ class Deck:
         return self.cards.pop()
 
 
-# Calculates and prints cards in hand 
+# Calculates and prints cards in hand
 class Player:
     '''Represents a player in the game.'''
-    def __init__(self,name):
+    def __init__(self, name):
         self.name = name
         self.hand = []
 
@@ -90,8 +94,8 @@ class Player:
     def hand_value(self):
         '''
         Calculates the total value of the player's hand.
-        Special Rule for Aces: If the total goes over 21 
-        and the player has an Ace, the Ace's value is 
+        Special Rule for Aces: If the total goes over 21
+        and the player has an Ace, the Ace's value is
         reduced from 11 to 1.
         '''
         value = sum(card.value for card in self.hand)
@@ -101,12 +105,12 @@ class Player:
             value -= 10
             aces -= 1
         return value
-    
+
     def print_hand(self):
         '''
-        This function will visually mimic a hand of cards 
-        by creating borders and displaying the suits and 
-        names in a structured format, making it 
+        This function will visually mimic a hand of cards
+        by creating borders and displaying the suits and
+        names in a structured format, making it
         easy to understand what cards are being held.
         '''
         print("\n" + " ".join(["+---+" for _ in self.hand]))
@@ -119,30 +123,31 @@ class Player:
         '''Checks if the player's total exceeds 21 (they "bust").'''
         return self.hand_value() > MAX_SCORE
 
+
 class BlackjackGame:
     '''Manages the State and logic of Lucky 21 Blackjack game.'''
     def __init__(self, player_name):
         self.player_name = player_name
         self.player_wins = 0
         self.dealer_wins = 0
-    
+
     # Displays current game state
     def print_game_state(self, player, dealer, hide_dealer_card=True):
-        ''' 
+        '''
         Clears the screen and displays the game status.
-        If hide_dealer_card is True, one of the dealer's 
+        If hide_dealer_card is True, one of the dealer's
         cards is hidden.
         '''
         os.system('cls' if os.name == 'nt' else 'clear')
         print("***********************************************")
         print("*   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   *")
         print("***********************************************")
-    
+
         print(f"\n--- {dealer.name}'s Hand ---")
         '''
-        This code is responsible for displaying the hands and 
-        scores of both dealer and player. It conditionally 
-        shows the dealer's card based on whether it should be 
+        This code is responsible for displaying the hands and
+        scores of both dealer and player. It conditionally
+        shows the dealer's card based on whether it should be
         hidden, while always showing the player's hand value.
         '''
         if hide_dealer_card:
@@ -155,14 +160,14 @@ class BlackjackGame:
         print(f"\n--- {player.name}'s Hand ---")
         player.print_hand()
         print(f"{player.name}'s Score: {player.hand_value()}")
-
         print("\n----------------------------")
 
-
-    def print_scoreboard(self):  
-        '''Displays the current scoreboard.'''  
-        print(f"\nSCORE - {self.player_name}: {self.player_wins} | Dealer: {self.dealer_wins}")  
-
+    def print_scoreboard(self):
+        """Displays the current scoreboard."""
+        print(
+            f"\nSCORE - {self.player_name}: {self.player_wins} | "
+            f"Dealer: {self.dealer_wins}"
+        )
 
     def lucky_21(self):
         '''
@@ -174,7 +179,7 @@ class BlackjackGame:
         player = Player(name=self.player_name)
         dealer = Player(name="Dealer")
 
-        # Initial deal 
+        # Initial deal
         for _ in range(2):
             player.add_card(deck.draw())
             dealer.add_card(deck.draw())
@@ -184,38 +189,39 @@ class BlackjackGame:
             time.sleep(1)
             self.print_game_state(player, dealer, hide_dealer_card=False)
             print(f"{player.name} hits Blackjack! {player.name} wins!")
-            self.player_wins += 1  # Update player wins  
-            self.print_scoreboard() 
+            self.player_wins += 1  # Update player wins
+            self.print_scoreboard()
             return
         if dealer.hand_value() == MAX_SCORE:
             time.sleep(1)
             self.print_game_state(player, dealer, hide_dealer_card=False)
             print("Dealer hits Blackjack! Dealer wins!")
-            self.dealer_wins += 1  # Update dealer wins  
+            self.dealer_wins += 1  # Update dealer wins
             self.print_scoreboard()
             return
 
-        # Players turn 
+        # Players turn
         while True:
             self.print_game_state(player, dealer)
             if player.is_busted():
-                self.print_game_state(player, dealer, hide_dealer_card=False)  # Reveal dealer's card
+                '''Reveal dealers hand'''
+                self.print_game_state(player, dealer, hide_dealer_card=False)
                 print(f"{player.name} busts! Dealer wins.")
                 self.dealer_wins += 1
                 self.print_scoreboard()
                 return
-            
+
             if len(player.hand) == 5:
                 '''Player wins if they draw 5 cards without busting.'''
                 self.print_game_state(player, dealer, hide_dealer_card=False)
-                print(f"{player.name} wins by drawing 5 cards without busting!")
+                print(f"{player.name} wins, drew 5 cards without busting!")
                 self.player_wins += 1
                 self.print_scoreboard()
                 return
 
             while True:
                 choice = input("Would you like to [H]it or [S]tand ?:\n").lower()
-                if choice in ['h', 's',]:
+                if choice in ['h', 's']:
                     time.sleep(1)
                     os.system('cls' if os.name == 'nt' else 'clear')
                     break
@@ -230,19 +236,22 @@ class BlackjackGame:
 
         # Dealer's turn
         '''
-        The dealer logic uses a while True loop to make it 
-        easier to read. It checks the dealer's hand value 
-        once per turn to decide whether to hit, clarifying 
+        The dealer logic uses a while True loop to make it
+        easier to read. It checks the dealer's hand value
+        once per turn to decide whether to hit, clarifying
         the drawing rules and improving performance.
         '''
         while True:
             if dealer.hand_value() < DEALER_STAND_SCORE:
                 dealer.add_card(deck.draw())
-            elif dealer.hand_value() == 17 and any(card.name == 'A' for card in dealer.hand):
+            elif (
+                dealer.hand_value() == 17
+                and any(card.name == 'A' for card in dealer.hand)
+            ):
                 dealer.add_card(deck.draw())
             else:
                 break
-            
+
             if len(dealer.hand) == 5:
                 self.print_game_state(player, dealer, hide_dealer_card=False)
                 print("Dealer wins by drawing 5 cards without busting!")
@@ -275,6 +284,7 @@ class BlackjackGame:
 
         self.print_scoreboard()
 
+
 # Game insructions
 def show_instructions():
     os.system("clear")
@@ -303,7 +313,7 @@ def show_instructions():
 # Main Game loop
 if __name__ == "__main__":
     os.system("clear")
-    show_instructions() 
+    show_instructions()
     while True:
         player_name = input("Enter your name to play:\n").strip()
         if player_name:
@@ -316,9 +326,13 @@ if __name__ == "__main__":
     game = BlackjackGame(player_name)
 
     while True:
-        ''''''
+        '''
+        Exception handling for user input: If an exception occurs
+        while processing the input, it prints an error message.
+        Check if user wants to quit.
+        '''
         try:
-            game.lucky_21() 
+            game.lucky_21()
         except Exception as e:
             print(f"An error occurred during the game: {e}")
             break
@@ -328,6 +342,7 @@ if __name__ == "__main__":
                 play_again = input("Press ENTER to continue or type 'Q' to quit: ").upper()
                 if play_again in ['', 'Q']:
                     time.sleep(0.5)
+                    os.system("clear")
                     break
                 else:
                     print("Invalid input. Please press ENTER to continue or type 'Q' to quit.")
