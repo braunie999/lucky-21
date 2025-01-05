@@ -316,14 +316,24 @@ if __name__ == "__main__":
     game = BlackjackGame(player_name)
 
     while True:
-        game.lucky_21()  
+        ''''''
+        try:
+            game.lucky_21() 
+        except Exception as e:
+            print(f"An error occurred during the game: {e}")
+            break
+
         while True:
-            play_again = input("Press ENTER to continue or type 'Q' to quit: ").upper()
-            if play_again in ['', 'Q']:
-                time.sleep(0.5)
-                break
-            else:
-                print("Invalid input. Please press ENTER to continue or type 'Q' to quit.")
+            try:
+                play_again = input("Press ENTER to continue or type 'Q' to quit: ").upper()
+                if play_again in ['', 'Q']:
+                    time.sleep(0.5)
+                    break
+                else:
+                    print("Invalid input. Please press ENTER to continue or type 'Q' to quit.")
+            except Exception as e:
+                print(f"An error occurred while processing your input: {e}")
+
         if play_again == 'Q':
             print(f"THANKS FOR PLAYING, {player_name}!".upper())
             break
