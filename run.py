@@ -241,6 +241,13 @@ class BlackjackGame:
             else:
                 break
             
+            if len(dealer.hand) == 5:
+                self.print_game_state(player, dealer, hide_dealer_card=False)
+                print("Dealer wins by drawing 5 cards without busting!")
+                self.dealer_wins += 1
+                self.print_scoreboard()
+                return
+                
         self.print_game_state(player, dealer, hide_dealer_card=False)
 
         # Determine the winner of round
