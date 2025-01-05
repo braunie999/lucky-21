@@ -219,7 +219,7 @@ class BlackjackGame:
                     os.system('cls' if os.name == 'nt' else 'clear')
                     break
                 else:
-                    print("Input invalid. Please enter 'H' to hit or 'S' to stand.")
+                    print("Input invalid. Enter 'H' to hit or 'S' to stand.")
 
             if choice == 'h':
                 player.add_card(deck.draw())
@@ -281,14 +281,20 @@ def show_instructions():
     *              HOW TO PLAY LUCKY 21              *
     **************************************************
     - The goal is to get as close to 21 as possible without exceeding it.
-    - Face cards (K, Q, J) are worth 10, as well as T cards.
+    - Number cards (2-10/T) are worth their face value.
+    - Face cards (K, Q, J) are worth 10 points each.
     - Aces are worth 11 or 1, depending on what benefits you.
     - Type 'H' to Hit (draw a card).
     - Type 'S' to Stand (keep your current hand).
     - The dealer must draw until reaching at least 17.
+    - If you go over 21, you bust and lose the game.
+    - If the dealer goes over 21, the dealer busts and you win.
+    - If both you and the dealer stand, the hand closest to 21 wins.
+    - In case of a tie, the game is a draw.
     **************************************************
     """)
     input("Press Enter to continue...\n")
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 # Main Game loop
