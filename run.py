@@ -134,9 +134,7 @@ class BlackjackGame:
         '''
         os.system('cls' if os.name == 'nt' else 'clear')
         print("***********************************************")
-        print("*                                             *")
         print("*   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   *")
-        print("*                                             *")
         print("***********************************************")
     
         print(f"\n--- {dealer.name}'s Hand ---")
@@ -157,9 +155,7 @@ class BlackjackGame:
         player.print_hand()
         print(f"{player.name}'s Score: {player.hand_value()}")
 
-        print("\n**************************************************")
-        print("*                GOOD LUCK, HAVE FUN!            *")
-        print("**************************************************")
+        print("\n----------------------------")
 
 
     def print_scoreboard(self):  
