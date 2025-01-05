@@ -157,6 +157,10 @@ class BlackjackGame:
         player.print_hand()
         print(f"{player.name}'s Score: {player.hand_value()}")
 
+        print("\n**************************************************")
+        print("*                GOOD LUCK, HAVE FUN!            *")
+        print("**************************************************")
+
 
     def print_scoreboard(self):  
         '''Displays the current scoreboard.'''  
