@@ -307,7 +307,12 @@ if __name__ == "__main__":
 
     while True:
         game.lucky_21()  
-        play_again = input("Press ENTER to continue or type 'Q' to quit.").upper()
+        while True:
+            play_again = input("Press ENTER to continue or type 'Q' to quit: ").upper()
+            if play_again in ['', 'Q']:
+                break
+            else:
+                print("Invalid input. Please press ENTER to continue or type 'Q' to quit.")
         if play_again == 'Q':
-            print(f"Thanks for playing, {player_name}!".upper())
+            print(f"THANKS FOR PLAYING, {player_name}!".upper())
             break
