@@ -220,10 +220,10 @@ class BlackjackGame:
                 return
 
             while True:
-                choice = input("Would you like to [H]it or [S]tand ?:\n").lower()
+                choice = input("[H]it or [S]tand ?:\n").lower()
                 if choice in ['h', 's']:
                     time.sleep(1)
-                    os.system('cls' if os.name == 'nt' else 'clear')
+                    os.system("clear")
                     break
                 else:
                     print("Input invalid. Enter 'H' to hit or 'S' to stand.")
@@ -339,13 +339,15 @@ if __name__ == "__main__":
 
         while True:
             try:
-                play_again = input("Press ENTER to continue or type 'Q' to quit: ").upper()
+                play_again = input("ENTER to cont or 'Q' to quit:\n").upper()
                 if play_again in ['', 'Q']:
                     time.sleep(0.5)
                     os.system("clear")
                     break
                 else:
-                    print("Invalid input. Please press ENTER to continue or type 'Q' to quit.")
+                    print(
+                        "Invalid input. ENTER to cont or type 'Q' to quit."
+                    )
             except Exception as e:
                 print(f"An error occurred while processing your input: {e}")
 
