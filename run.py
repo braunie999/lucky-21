@@ -247,7 +247,7 @@ class BlackjackGame:
                 self.dealer_wins += 1
                 self.print_scoreboard()
                 return
-                
+
         self.print_game_state(player, dealer, hide_dealer_card=False)
 
         # Determine the winner of round
@@ -260,10 +260,14 @@ class BlackjackGame:
         elif dealer.hand_value() > player.hand_value():
             print("Dealer wins!")
             self.dealer_wins += 1
-        elif player.hand_value() == dealer.hand_value():
+        else:
+            # Tie-breaker logic
             if len(player.hand) < len(dealer.hand):
-                print(f"{player.name} wins with fewer cards!")
-                self.player_wins += 1 
+                print(f"{player.name} wins by having fewer cards!")
+                self.player_wins += 1
+            elif len(player.hand) > len(dealer.hand):
+                print("Dealer wins by having fewer cards!")
+                self.dealer_wins += 1
             else:
                 print("It's a tie!")
 
