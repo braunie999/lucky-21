@@ -204,6 +204,14 @@ class BlackjackGame:
                 self.dealer_wins += 1
                 self.print_scoreboard()
                 return
+            
+            if len(player.hand) == 5:
+                '''Player wins if they draw 5 cards without busting.'''
+                self.print_game_state(player, dealer, hide_dealer_card=False)
+                print(f"{player.name} wins by drawing 5 cards without busting!")
+                self.player_wins += 1
+                self.print_scoreboard()
+                return
 
             while True:
                 choice = input("Would you like to [H]it or [S]tand ?:\n").lower()
