@@ -108,7 +108,11 @@ The Lucky 21 Blackjack Game follows the Object-Oriented Programming (OOP) paradi
 
 The game uses simple visual elements to display cards and game status:
 
-* Cards are shown in a compact format, e.g., `+---+ |♠  | | A | |  ♠| +---+`.
+* Cards are shown in a compact format, e.g.,
+ +---+
+ |♠  |
+ | A |
+ +---+
 * Scoreboard and messages are displayed prominently for clarity.
 
 ## Features
