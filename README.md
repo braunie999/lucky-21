@@ -121,7 +121,7 @@ The game uses simple visual elements to display cards and game status:
 
 ## Features
 
-### Instructions Screen
+### Instruction Screen
 
 * Explains the rules of Blackjack in simple terms.
   >![Game Instructions](assets/screenshots/intro_instructions.png)
@@ -162,7 +162,7 @@ The game uses simple visual elements to display cards and game status:
 * The player wins by having a higher hand value than the dealer without exceeding 21.
 * If the player or dealer exceeds 21, they bust and lose the round.
 
-### Example Game Flow
+#### Example Game Flow
 
 1. The player enters their name.
 2. The game displays the initial hands of the player and dealer.
@@ -170,7 +170,7 @@ The game uses simple visual elements to display cards and game status:
 4. The dealer plays according to the rules.
 5. The game announces the winner or if it’s a tie.
 
-### Updated Scoreboard
+#### Updated Scoreboard
 
 * Scores are displayed at the end of each round.
 * Tie-breaking logic ensures a winner is declared when possible.
