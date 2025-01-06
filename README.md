@@ -1,5 +1,9 @@
 # Lucky 21 Blackjack Game
 
+![Screenshot of homepage](assets/screenshots/mockup.png)
+
+Please note: To open any links in this document in a new browser tab, please press CTRL + Click.
+
 ## Table of Contents
 
 * [Overview](#overview)
@@ -73,6 +77,10 @@ The primary goal of the Lucky 21 Blackjack Game is to provide an interactive, fu
 6. Determine the winner of the round.
 7. Update and display scores.
 8. Allow the player to replay or quit.
+  
+#### Visual Flow of Game Logic
+
+![Flow chart](assets/logic/blackjack_game_logic_flow.png)
 
 #### Programming Paradigm
 
@@ -108,34 +116,35 @@ The Lucky 21 Blackjack Game follows the Object-Oriented Programming (OOP) paradi
 
 The game uses simple visual elements to display cards and game status:
 
-* Cards are shown in a compact format, e.g.,
- +---+
- |♠  |
- | A |
- +---+
+* Cards are shown in a compact format.
 * Scoreboard and messages are displayed prominently for clarity.
 
 ## Features
 
-### Welcome Screen
-
-* A greeting message and instructions for the game.
-* Prompts the player to enter their name.
-
 ### Instructions Screen
 
 * Explains the rules of Blackjack in simple terms.
-
+  >![Game Instructions](assets/screenshots/intro_instructions.png)
+* Prompts the player to enter their name.
+  >![Enter player name](assets/screenshots/invalid_player_input1.png)
+  
 ### Scoreboard
 
 * Tracks and displays the player's and dealer's wins.
 * Updates after each round.
+  >![Scoreboard](assets/screenshots/scoreboard.png)
 
 ### Gameplay
 
 * Implements standard Blackjack rules, including busting, Blackjack, and dealer actions.
+  >![Standard game play](assets/screenshots/dealer_busts.png)![standard game play](assets/screenshots/player_hits_21.png)
+  >![Standard game play](assets/screenshots/player_wins_with_5_cards.png)
+
 * Player can Hit or Stand.
-* The dealer automatically follows Blackjack rules.
+  >![Player choice](assets/screenshots/invalid_input2.png)
+
+* Playeer can continue or quit game after every round.
+  >![Player choice](assets/screenshots/invalid_input3.png)![Leaving Message](assets/screenshots/leaving_msg.png)
 
 ### Game Rules
 
@@ -210,6 +219,7 @@ The game uses simple visual elements to display cards and game status:
 #### Validator Testing
 
 * Code was validated using [[pep8online.com](https://pep8ci.herokuapp.com/)] to ensure compliance with PEP 8 standards.
+* No errors was found when running the code through CI Python Linter ![Validation results](assets/validation/pep8_run.py.png)
 
 #### Notable Bugs
 
