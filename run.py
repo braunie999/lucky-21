@@ -146,13 +146,13 @@ class BlackjackGame:
             print("*   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   *")
             print("***********************************************")
 
-        print(f"\n--- {dealer.name}'s Hand ---")
         '''
         This code is responsible for displaying the hands and
         scores of both dealer and player. It conditionally
         shows the dealer's card based on whether it should be
         hidden, while always showing the player's hand value.
         '''
+        print(f"\n--- {dealer.name}'s Hand ---")
         if hide_dealer_card:
             print("[Hidden Card]")
             dealer.hand[1].print_card()
