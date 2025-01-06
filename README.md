@@ -205,17 +205,57 @@ The game uses simple visual elements to display cards and game status:
 
 ### Testing Strategy
 
-* Manual testing for all game functionalities.
-* Test cases for edge conditions, e.g., busting, Blackjack, and tie-breakers.
-* Compatibility testing across multiple terminal environments.
+#### Manual Testing
+
+* Verified the shuffle and draw mechanics to ensure randomness.
+* Tested Ace value adjustment logic under various conditions.
+* Checked dealer behavior to ensure it follows the rules (e.g., standing on 17).
+* Validated user inputs for both valid and invalid responses (e.g., unexpected characters, numbers out of range).
+
+#### Edge Case Testing
+
+* Confirmed correct behavior when a player or dealer busts.
+* Ensured proper handling of ties and blackjack scenarios.
+* Verified handling of an empty deck in long replay sessions.
+
+### Testing Methodology
+
+* Ran the game with multiple rounds to observe memory management and stability.
+* Input stress tests by providing rapid, random inputs to simulate unpredictable user behavior.
+
+### Testing Results
+
+#### Pass
+
+* All standard game mechanics (hit, stand, dealer behavior, scoring).
+* Scoreboard updates and display formatting.
+* Replay functionality and exit prompts.
 
 #### Testing Overview
 
-* Validated the card shuffle and draw mechanics.
-* Verified correct handling of Aces in score calculation.
-* Ensured proper dealer behavior, including standing on 17.
-* Checked user input validation for Hit/Stand decisions.
-* Tested scoreboard updates after each round.
+##### Player Hits Blackjack on Initial Deal
+
+* Input: No action required.s
+* Expected Result: Player wins immediately, and score updates.
+* Actual Result: Passed.
+  
+##### Dealer Busts After Multiple Draws
+
+* Input: Player stands early.
+* Expected Result: Dealer exceeds 21, player wins.
+* Actual Result: Passed.
+
+##### Invalid Input Handling
+
+* Input: Enter "xyz" instead of "hit" or "stand".
+* Expected Result: Prompt user to enter a valid response.
+* Actual Result: Passed.
+
+##### Tie Game
+
+* Input: Both player and dealer have the same total (e.g., 20).
+* Expected Result: Declare a tie, no score change.
+* Actual Result: Passed.
 
 #### Validator Testing
 
