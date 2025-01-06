@@ -132,16 +132,19 @@ class BlackjackGame:
         self.dealer_wins = 0
 
     # Displays current game state
-    def print_game_state(self, player, dealer, hide_dealer_card=True):
+    def print_game_state(
+        self, player, dealer, hide_dealer_card=True, show_welcome=True
+    ):
         '''
         Clears the screen and displays the game status.
         If hide_dealer_card is True, one of the dealer's
         cards is hidden.
         '''
         os.system('cls' if os.name == 'nt' else 'clear')
-        print("***********************************************")
-        print("*   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   *")
-        print("***********************************************")
+        if show_welcome:
+            print("***********************************************")
+            print("*   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   *")
+            print("***********************************************")
 
         print(f"\n--- {dealer.name}'s Hand ---")
         '''
@@ -187,14 +190,18 @@ class BlackjackGame:
         # Check for Blackjack immediately after the initial deal
         if player.hand_value() == MAX_SCORE:
             time.sleep(1)
-            self.print_game_state(player, dealer, hide_dealer_card=False)
+            self.print_game_state(
+                player, dealer, hide_dealer_card=False,
+            )
             print(f"{player.name} hits Blackjack! {player.name} wins!")
             self.player_wins += 1  # Update player wins
             self.print_scoreboard()
             return
         if dealer.hand_value() == MAX_SCORE:
             time.sleep(1)
-            self.print_game_state(player, dealer, hide_dealer_card=False)
+            self.print_game_state(
+                player, dealer, hide_dealer_card=False,
+            )
             print("Dealer hits Blackjack! Dealer wins!")
             self.dealer_wins += 1  # Update dealer wins
             self.print_scoreboard()
@@ -205,7 +212,9 @@ class BlackjackGame:
             self.print_game_state(player, dealer)
             if player.is_busted():
                 '''Reveal dealers hand'''
-                self.print_game_state(player, dealer, hide_dealer_card=False)
+                self.print_game_state(
+                    player, dealer, hide_dealer_card=False, show_welcome=False
+                )
                 print(f"{player.name} busts! Dealer wins.")
                 self.dealer_wins += 1
                 self.print_scoreboard()
@@ -213,7 +222,9 @@ class BlackjackGame:
 
             if len(player.hand) == 5:
                 '''Player wins if they draw 5 cards without busting.'''
-                self.print_game_state(player, dealer, hide_dealer_card=False)
+                self.print_game_state(
+                    player, dealer, hide_dealer_card=False, show_welcome=False
+                )
                 print(f"{player.name} wins, drew 5 cards without busting!")
                 self.player_wins += 1
                 self.print_scoreboard()
@@ -222,14 +233,15 @@ class BlackjackGame:
             while True:
                 choice = input("[H]it or [S]tand ?:\n").lower()
                 if choice in ['h', 's']:
+                    os.system('cls' if os.name == 'nt' else 'clear')
+                    print("Game Loading...")
                     time.sleep(1)
-                    os.system("clear")
                     break
                 else:
                     print("Input invalid. Enter 'H' to hit or 'S' to stand.")
 
             if choice == 'h':
-                time.sleep(0.2)
+                time.sleep(1)
                 player.add_card(deck.draw())
             else:
                 break
@@ -253,13 +265,17 @@ class BlackjackGame:
                 break
 
             if len(dealer.hand) == 5:
-                self.print_game_state(player, dealer, hide_dealer_card=False)
+                self.print_game_state(
+                    player, dealer, hide_dealer_card=False, show_welcome=False
+                )
                 print("Dealer wins by drawing 5 cards without busting!")
                 self.dealer_wins += 1
                 self.print_scoreboard()
                 return
 
-        self.print_game_state(player, dealer, hide_dealer_card=False)
+        self.print_game_state(
+            player, dealer, hide_dealer_card=False, show_welcome=False
+        )
 
         # Determine the winner of round
         if dealer.is_busted():
@@ -318,7 +334,9 @@ if __name__ == "__main__":
         player_name = input("Enter your name to play:\n").strip()
         if player_name:
             player_name = player_name.capitalize()
-            time.sleep(0.5)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Game Loading...")
+            time.sleep(2)
             break
         else:
             print("Name cannot be empty. Please enter your name.")
