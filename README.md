@@ -267,7 +267,11 @@ The game uses simple visual elements to display cards and game status:
 
 * __Resolved__: Dealer occasionally drawing cards incorrectly on soft 17.
 * __Resolved__: Incorrect display of score in certain edge cases.
+  
+#### Remaining Bugs
 
+* __Unresolved__: Issues with clearing 'Welcome to lucky 21' banner and partial dealer hand in terminal.
+  
 #### Libraries Utilized
 
 ##### Built-in Python Libraries
