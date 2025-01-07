@@ -3,6 +3,7 @@
 ![Screenshot of homepage](assets/screenshots/mockup.png)
 
 Please note: To open any links in this document in a new browser tab, please press CTRL + Click.
+[View the live website on GitHub Pages](https://github.com/braunie999/lucky-21.git)
 
 ## Table of Contents
 
