@@ -239,7 +239,7 @@ class BlackjackGame:
                     break
                 else:
                     print("Input invalid. Enter 'H' to hit or 'S' to stand.")
-
+                    time.sleep(2)
             if choice == 'h':
                 time.sleep(1)
                 player.add_card(deck.draw())
@@ -303,7 +303,7 @@ class BlackjackGame:
 
 # Game insructions
 def show_instructions():
-    os.system("clear")
+    os.system('cls' if os.name == 'nt' else 'clear')
     print("""
     **************************************************
     *              HOW TO PLAY LUCKY 21              *
@@ -360,12 +360,13 @@ if __name__ == "__main__":
                 play_again = input("ENTER to cont or 'Q' to quit:\n").upper()
                 if play_again in ['', 'Q']:
                     time.sleep(0.5)
-                    os.system("clear")
+                    os.system('cls' if os.name == 'nt' else 'clear')
                     break
                 else:
                     print(
                         "Invalid input. ENTER to cont or type 'Q' to quit."
                     )
+                    time.sleep(2)
             except Exception as e:
                 print(f"An error occurred while processing your input: {e}")
 
