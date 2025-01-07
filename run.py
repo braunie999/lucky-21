@@ -142,12 +142,11 @@ class BlackjackGame:
         '''
         os.system('cls' if os.name == 'nt' else 'clear')
         if show_welcome:
-            print("""
-            ***********************************************
-            *   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   *
-            ***********************************************
-            """)
-
+            print(""" 
+                    ***********************************************
+                    *   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   * 
+                    *********************************************** 
+                    """)
         '''
         This code is responsible for displaying the hands and
         scores of both dealer and player. It conditionally
@@ -157,7 +156,11 @@ class BlackjackGame:
         print(f"\n--- {dealer.name}'s Hand ---")
         if hide_dealer_card:
             print("[Hidden Card]")
-            dealer.hand[1].print_card()
+            print("+---+") 
+            print(f"|{dealer.hand[1].suit}  |") 
+            print(f"| {dealer.hand[1].name} |") 
+            print(f"|  {dealer.hand[1].suit}|") 
+            print("+---+")
         else:
             dealer.print_hand()
             print(f"{dealer.name}'s Score: {dealer.hand_value()}")
@@ -332,7 +335,7 @@ def show_instructions():
 
 # Main Game loop
 if __name__ == "__main__":
-    os.system("clear")
+    os.system('cls' if os.name == 'nt' else 'clear')
     show_instructions()
     while True:
         player_name = input("Enter your name to play:\n").strip()
