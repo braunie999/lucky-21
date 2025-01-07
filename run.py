@@ -142,11 +142,10 @@ class BlackjackGame:
         '''
         os.system('cls' if os.name == 'nt' else 'clear')
         if show_welcome:
-            print(""" 
-                    ***********************************************
-                    *   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   * 
-                    *********************************************** 
-                    """)
+            print("  ***********************************************")
+            print("  *   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   *")
+            print("  ***********************************************")
+
         '''
         This code is responsible for displaying the hands and
         scores of both dealer and player. It conditionally
@@ -198,7 +197,7 @@ class BlackjackGame:
         if player.hand_value() == MAX_SCORE:
             time.sleep(1)
             self.print_game_state(
-                player, dealer, hide_dealer_card=False, show_welcome=False
+                player, dealer, hide_dealer_card=False
             )
             print(f"{player.name} hits Blackjack! {player.name} wins!")
             self.player_wins += 1  # Update player wins
@@ -207,7 +206,7 @@ class BlackjackGame:
         if dealer.hand_value() == MAX_SCORE:
             time.sleep(1)
             self.print_game_state(
-                player, dealer, hide_dealer_card=False, show_welcome=False
+                player, dealer, hide_dealer_card=False
             )
             print("Dealer hits Blackjack! Dealer wins!")
             self.dealer_wins += 1  # Update dealer wins
