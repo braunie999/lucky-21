@@ -146,20 +146,16 @@ class BlackjackGame:
             print("  *   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   *")
             print("  ***********************************************")
 
+        print(f"\n--- {dealer.name}'s Hand ---")
         '''
         This code is responsible for displaying the hands and
         scores of both dealer and player. It conditionally
         shows the dealer's card based on whether it should be
         hidden, while always showing the player's hand value.
         '''
-        print(f"\n--- {dealer.name}'s Hand ---")
         if hide_dealer_card:
             print("[Hidden Card]")
-            print("+---+") 
-            print(f"|{dealer.hand[1].suit}  |") 
-            print(f"| {dealer.hand[1].name} |") 
-            print(f"|  {dealer.hand[1].suit}|") 
-            print("+---+")
+            dealer.hand[1].print_card()
         else:
             dealer.print_hand()
             print(f"{dealer.name}'s Score: {dealer.hand_value()}")
@@ -167,10 +163,8 @@ class BlackjackGame:
         print(f"\n--- {player.name}'s Hand ---")
         player.print_hand()
         print(f"{player.name}'s Score: {player.hand_value()}")
-        print("""
-                \n----------------------------
-            """)
-
+        print("\n------------------------------")
+    
     def print_scoreboard(self):
         """Displays the current scoreboard."""
         print(
@@ -245,7 +239,7 @@ class BlackjackGame:
                     break
                 else:
                     print("Input invalid. Enter 'H' to hit or 'S' to stand.")
-                    time.sleep(2)
+
             if choice == 'h':
                 time.sleep(0.5)
                 player.add_card(deck.draw())
@@ -309,7 +303,6 @@ class BlackjackGame:
 
 # Game insructions
 def show_instructions():
-    os.system('cls' if os.name == 'nt' else 'clear')
     print("""
     **************************************************
     *              HOW TO PLAY LUCKY 21              *
@@ -372,8 +365,6 @@ if __name__ == "__main__":
                     print(
                         "Invalid input. ENTER to cont or type 'Q' to quit."
                     )
-                    time.sleep(2)
-                    os.system('cls' if os.name == 'nt' else 'clear')
             except Exception as e:
                 print(f"An error occurred while processing your input: {e}")
                 time.sleep(2)
