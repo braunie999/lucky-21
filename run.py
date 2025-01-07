@@ -371,8 +371,11 @@ if __name__ == "__main__":
                         "Invalid input. ENTER to cont or type 'Q' to quit."
                     )
                     time.sleep(2)
+                    os.system('cls' if os.name == 'nt' else 'clear')
             except Exception as e:
                 print(f"An error occurred while processing your input: {e}")
+                time.sleep(2)
+                os.system('cls' if os.name == 'nt' else 'clear')
 
         if play_again == 'Q':
             print(f"THANKS FOR PLAYING, {player_name}!".upper())
