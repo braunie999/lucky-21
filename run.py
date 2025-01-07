@@ -142,9 +142,11 @@ class BlackjackGame:
         '''
         os.system('cls' if os.name == 'nt' else 'clear')
         if show_welcome:
-            print("***********************************************")
-            print("*   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   *")
-            print("***********************************************")
+            print("""
+            ***********************************************
+            *   ♣ ♠ ♥ ♦ ~ Welcome to Lucky 21 ~ ♦ ♥ ♠ ♣   *
+            ***********************************************
+            """)
 
         '''
         This code is responsible for displaying the hands and
@@ -163,7 +165,9 @@ class BlackjackGame:
         print(f"\n--- {player.name}'s Hand ---")
         player.print_hand()
         print(f"{player.name}'s Score: {player.hand_value()}")
-        print("\n----------------------------")
+        print("""
+                \n----------------------------
+            """)
 
     def print_scoreboard(self):
         """Displays the current scoreboard."""
@@ -213,7 +217,7 @@ class BlackjackGame:
             if player.is_busted():
                 '''Reveal dealers hand'''
                 self.print_game_state(
-                    player, dealer, hide_dealer_card=False, show_welcome=False
+                    player, dealer, hide_dealer_card=False, show_welcome=True
                 )
                 print(f"{player.name} busts! Dealer wins.")
                 self.dealer_wins += 1
@@ -223,7 +227,7 @@ class BlackjackGame:
             if len(player.hand) == 5:
                 '''Player wins if they draw 5 cards without busting.'''
                 self.print_game_state(
-                    player, dealer, hide_dealer_card=False, show_welcome=False
+                    player, dealer, hide_dealer_card=False, show_welcome=True
                 )
                 print(f"{player.name} wins, drew 5 cards without busting!")
                 self.player_wins += 1
@@ -266,7 +270,7 @@ class BlackjackGame:
 
             if len(dealer.hand) == 5:
                 self.print_game_state(
-                    player, dealer, hide_dealer_card=False, show_welcome=False
+                    player, dealer, hide_dealer_card=False, show_welcome=True
                 )
                 print("Dealer wins by drawing 5 cards without busting!")
                 self.dealer_wins += 1
