@@ -195,7 +195,7 @@ class BlackjackGame:
         if player.hand_value() == MAX_SCORE:
             time.sleep(1)
             self.print_game_state(
-                player, dealer, hide_dealer_card=False,
+                player, dealer, hide_dealer_card=False, show_welcome=False
             )
             print(f"{player.name} hits Blackjack! {player.name} wins!")
             self.player_wins += 1  # Update player wins
@@ -204,7 +204,7 @@ class BlackjackGame:
         if dealer.hand_value() == MAX_SCORE:
             time.sleep(1)
             self.print_game_state(
-                player, dealer, hide_dealer_card=False,
+                player, dealer, hide_dealer_card=False, show_welcome=False
             )
             print("Dealer hits Blackjack! Dealer wins!")
             self.dealer_wins += 1  # Update dealer wins
@@ -217,7 +217,7 @@ class BlackjackGame:
             if player.is_busted():
                 '''Reveal dealers hand'''
                 self.print_game_state(
-                    player, dealer, hide_dealer_card=False, show_welcome=True
+                    player, dealer, hide_dealer_card=False, show_welcome=False
                 )
                 print(f"{player.name} busts! Dealer wins.")
                 self.dealer_wins += 1
@@ -227,7 +227,7 @@ class BlackjackGame:
             if len(player.hand) == 5:
                 '''Player wins if they draw 5 cards without busting.'''
                 self.print_game_state(
-                    player, dealer, hide_dealer_card=False, show_welcome=True
+                    player, dealer, hide_dealer_card=False, show_welcome=False
                 )
                 print(f"{player.name} wins, drew 5 cards without busting!")
                 self.player_wins += 1
@@ -245,7 +245,7 @@ class BlackjackGame:
                     print("Input invalid. Enter 'H' to hit or 'S' to stand.")
                     time.sleep(2)
             if choice == 'h':
-                time.sleep(1)
+                time.sleep(0.5)
                 player.add_card(deck.draw())
             else:
                 break
@@ -270,7 +270,7 @@ class BlackjackGame:
 
             if len(dealer.hand) == 5:
                 self.print_game_state(
-                    player, dealer, hide_dealer_card=False, show_welcome=True
+                    player, dealer, hide_dealer_card=False, show_welcome=False
                 )
                 print("Dealer wins by drawing 5 cards without busting!")
                 self.dealer_wins += 1
